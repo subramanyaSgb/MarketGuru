@@ -47,13 +47,13 @@ export default function TimeframeCards({ analysis, loading }: TimeframeCardsProp
     return (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="p-5 bg-white rounded-2xl border border-gray-100 animate-pulse">
+          <div key={i} className="p-5 bg-white dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-700 animate-pulse">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 bg-gray-200 rounded-xl" />
-              <div className="h-5 bg-gray-200 rounded w-20" />
+              <div className="w-10 h-10 bg-gray-200 dark:bg-slate-700 rounded-xl" />
+              <div className="h-5 bg-gray-200 dark:bg-slate-700 rounded w-20" />
             </div>
-            <div className="h-8 bg-gray-200 rounded w-16 mb-2" />
-            <div className="h-4 bg-gray-200 rounded w-full" />
+            <div className="h-8 bg-gray-200 dark:bg-slate-700 rounded w-16 mb-2" />
+            <div className="h-4 bg-gray-200 dark:bg-slate-700 rounded w-full" />
           </div>
         ))}
       </div>
@@ -81,15 +81,15 @@ export default function TimeframeCards({ analysis, loading }: TimeframeCardsProp
                     {config.icon}
                   </div>
                   <div>
-                    <h3 className="font-bold text-gray-900 text-sm" style={{ fontFamily: 'Plus Jakarta Sans' }}>
+                    <h3 className="font-bold text-gray-900 dark:text-gray-100 text-sm" style={{ fontFamily: 'Plus Jakarta Sans' }}>
                       {config.label}
                     </h3>
-                    <span className="text-xs text-gray-500">{config.desc}</span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400">{config.desc}</span>
                   </div>
                 </div>
                 <Badge variant={variant} size="sm">{data.signal}</Badge>
               </div>
-              <p className="text-sm text-gray-600 leading-relaxed">{data.note}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{data.note}</p>
             </div>
           );
         }

@@ -11,11 +11,11 @@ export default function AIThinkingPanel({ analysis, loading }: AIThinkingPanelPr
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm flex flex-col overflow-hidden" style={{ maxHeight: 'calc(100vh - 6rem)' }}>
+    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-700 shadow-sm flex flex-col overflow-hidden" style={{ maxHeight: 'calc(100vh - 6rem)' }}>
       {/* Header */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between px-5 py-4 border-b border-gray-50 hover:bg-slate-50/50 transition-colors"
+        className="flex items-center justify-between px-5 py-4 border-b border-gray-50 dark:border-slate-800 hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors"
       >
         <div className="flex items-center gap-2.5">
           <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
@@ -23,7 +23,7 @@ export default function AIThinkingPanel({ analysis, loading }: AIThinkingPanelPr
               <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
             </svg>
           </div>
-          <span className="text-sm font-bold text-gray-900" style={{ fontFamily: 'Plus Jakarta Sans' }}>
+          <span className="text-sm font-bold text-gray-900 dark:text-gray-100" style={{ fontFamily: 'Plus Jakarta Sans' }}>
             AI Thinking
           </span>
           {loading && (
@@ -31,7 +31,7 @@ export default function AIThinkingPanel({ analysis, loading }: AIThinkingPanelPr
           )}
         </div>
         <svg
-          className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+          className={`w-4 h-4 text-gray-400 dark:text-gray-500 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
           fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"
         >
           <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -47,10 +47,10 @@ export default function AIThinkingPanel({ analysis, loading }: AIThinkingPanelPr
                 <span className="font-medium">Analyzing market data...</span>
               </div>
               {["Market Context", "Sector Health", "Trend Analysis", "Indicators"].map((label, i) => (
-                <div key={i} className="p-3 bg-slate-50 rounded-xl animate-pulse">
-                  <div className="h-3 bg-gray-200 rounded w-24 mb-2" />
-                  <div className="h-3 bg-gray-200 rounded w-full" />
-                  <div className="h-3 bg-gray-200 rounded w-3/4 mt-1.5" />
+                <div key={i} className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl animate-pulse">
+                  <div className="h-3 bg-gray-200 dark:bg-slate-700 rounded w-24 mb-2" />
+                  <div className="h-3 bg-gray-200 dark:bg-slate-700 rounded w-full" />
+                  <div className="h-3 bg-gray-200 dark:bg-slate-700 rounded w-3/4 mt-1.5" />
                 </div>
               ))}
             </div>
@@ -83,30 +83,30 @@ export default function AIThinkingPanel({ analysis, loading }: AIThinkingPanelPr
               />
 
               {/* Step 4: Key Levels */}
-              <div className="rounded-xl border border-gray-100 overflow-hidden">
-                <div className="flex items-center gap-2 px-3 py-2 bg-slate-50 border-b border-gray-100">
+              <div className="rounded-xl border border-gray-100 dark:border-slate-700 overflow-hidden">
+                <div className="flex items-center gap-2 px-3 py-2 bg-slate-50 dark:bg-slate-800 border-b border-gray-100 dark:border-slate-700">
                   <StepBadge step={4} />
-                  <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Key Levels</h4>
+                  <h4 className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Key Levels</h4>
                 </div>
-                <div className="grid grid-cols-2 gap-px bg-gray-100">
-                  <div className="bg-white p-3">
+                <div className="grid grid-cols-2 gap-px bg-gray-100 dark:bg-slate-700">
+                  <div className="bg-white dark:bg-slate-900 p-3">
                     <span className="text-[10px] font-bold text-emerald-500 uppercase tracking-wider">Support</span>
                     <div className="mt-1 space-y-0.5">
                       {analysis.key_levels?.support?.map((s, i) => (
-                        <div key={i} className="text-sm font-semibold text-gray-900">
+                        <div key={i} className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                           ₹{s.toLocaleString("en-IN")}
                         </div>
-                      )) || <span className="text-sm text-gray-400">—</span>}
+                      )) || <span className="text-sm text-gray-400 dark:text-gray-500">—</span>}
                     </div>
                   </div>
-                  <div className="bg-white p-3">
+                  <div className="bg-white dark:bg-slate-900 p-3">
                     <span className="text-[10px] font-bold text-red-500 uppercase tracking-wider">Resistance</span>
                     <div className="mt-1 space-y-0.5">
                       {analysis.key_levels?.resistance?.map((r, i) => (
-                        <div key={i} className="text-sm font-semibold text-gray-900">
+                        <div key={i} className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                           ₹{r.toLocaleString("en-IN")}
                         </div>
-                      )) || <span className="text-sm text-gray-400">—</span>}
+                      )) || <span className="text-sm text-gray-400 dark:text-gray-500">—</span>}
                     </div>
                   </div>
                 </div>
@@ -129,8 +129,8 @@ export default function AIThinkingPanel({ analysis, loading }: AIThinkingPanelPr
               />
 
               {/* Expert Reasoning */}
-              <div className="rounded-xl border border-blue-100 bg-blue-50/50 overflow-hidden">
-                <div className="flex items-center gap-2 px-3 py-2 bg-blue-50 border-b border-blue-100">
+              <div className="rounded-xl border border-blue-100 dark:border-blue-500/20 bg-blue-50/50 dark:bg-blue-500/10 overflow-hidden">
+                <div className="flex items-center gap-2 px-3 py-2 bg-blue-50 dark:bg-blue-500/10 border-b border-blue-100 dark:border-blue-500/20">
                   <div className="w-5 h-5 rounded-md bg-blue-500 flex items-center justify-center">
                     <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
@@ -140,8 +140,8 @@ export default function AIThinkingPanel({ analysis, loading }: AIThinkingPanelPr
                 </div>
                 <ul className="p-3 space-y-2.5">
                   {analysis.reasoning?.map((r, i) => (
-                    <li key={i} className="text-sm text-gray-700 flex items-start gap-2.5 leading-relaxed">
-                      <span className="w-5 h-5 rounded-md bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold mt-0.5 shrink-0">
+                    <li key={i} className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2.5 leading-relaxed">
+                      <span className="w-5 h-5 rounded-md bg-blue-100 dark:bg-blue-500/20 text-blue-600 flex items-center justify-center text-[10px] font-bold mt-0.5 shrink-0">
                         {i + 1}
                       </span>
                       {r}
@@ -152,12 +152,12 @@ export default function AIThinkingPanel({ analysis, loading }: AIThinkingPanelPr
 
               {/* Wisdom */}
               {analysis.wisdom && (
-                <div className="rounded-xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200/50 p-4">
+                <div className="rounded-xl bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-500/10 dark:to-orange-500/10 border border-amber-200/50 dark:border-amber-500/20 p-4">
                   <div className="flex items-start gap-2.5">
                     <span className="text-xl leading-none mt-0.5">💡</span>
                     <div>
                       <h4 className="text-[10px] font-bold text-amber-600 uppercase tracking-wider mb-1">Trading Wisdom</h4>
-                      <p className="text-sm text-amber-900 italic leading-relaxed">&ldquo;{analysis.wisdom}&rdquo;</p>
+                      <p className="text-sm text-amber-900 dark:text-amber-200 italic leading-relaxed">&ldquo;{analysis.wisdom}&rdquo;</p>
                     </div>
                   </div>
                 </div>
@@ -165,12 +165,12 @@ export default function AIThinkingPanel({ analysis, loading }: AIThinkingPanelPr
 
               {/* Warning */}
               {analysis.warning && (
-                <div className="rounded-xl bg-gradient-to-br from-red-50 to-rose-50 border border-red-200/50 p-4">
+                <div className="rounded-xl bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-500/10 dark:to-rose-500/10 border border-red-200/50 dark:border-red-500/20 p-4">
                   <div className="flex items-start gap-2.5">
                     <span className="text-xl leading-none mt-0.5">⚠️</span>
                     <div>
                       <h4 className="text-[10px] font-bold text-red-600 uppercase tracking-wider mb-1">Warning</h4>
-                      <p className="text-sm text-red-800 leading-relaxed">{analysis.warning}</p>
+                      <p className="text-sm text-red-800 dark:text-red-300 leading-relaxed">{analysis.warning}</p>
                     </div>
                   </div>
                 </div>
@@ -178,12 +178,12 @@ export default function AIThinkingPanel({ analysis, loading }: AIThinkingPanelPr
 
               {/* Did You Know */}
               {analysis.did_you_know && (
-                <div className="rounded-xl bg-gradient-to-br from-violet-50 to-purple-50 border border-violet-200/50 p-4">
+                <div className="rounded-xl bg-gradient-to-br from-violet-50 to-purple-50 dark:from-violet-500/10 dark:to-purple-500/10 border border-violet-200/50 dark:border-violet-500/20 p-4">
                   <div className="flex items-start gap-2.5">
                     <span className="text-xl leading-none mt-0.5">📚</span>
                     <div>
                       <h4 className="text-[10px] font-bold text-violet-600 uppercase tracking-wider mb-1">Did You Know?</h4>
-                      <p className="text-sm text-violet-800 leading-relaxed">{analysis.did_you_know}</p>
+                      <p className="text-sm text-violet-800 dark:text-violet-300 leading-relaxed">{analysis.did_you_know}</p>
                     </div>
                   </div>
                 </div>
@@ -198,18 +198,18 @@ export default function AIThinkingPanel({ analysis, loading }: AIThinkingPanelPr
 
 function StepBadge({ step }: { step: number }) {
   return (
-    <span className="w-5 h-5 rounded-md bg-gray-200 text-gray-600 flex items-center justify-center text-[10px] font-bold">
+    <span className="w-5 h-5 rounded-md bg-gray-200 dark:bg-slate-700 text-gray-600 dark:text-gray-400 flex items-center justify-center text-[10px] font-bold">
       {step}
     </span>
   );
 }
 
 const colorMap: Record<string, { bg: string; border: string; badge: string }> = {
-  blue: { bg: "bg-blue-50/50", border: "border-blue-100", badge: "bg-blue-100 text-blue-600" },
-  indigo: { bg: "bg-indigo-50/50", border: "border-indigo-100", badge: "bg-indigo-100 text-indigo-600" },
-  violet: { bg: "bg-violet-50/50", border: "border-violet-100", badge: "bg-violet-100 text-violet-600" },
-  cyan: { bg: "bg-cyan-50/50", border: "border-cyan-100", badge: "bg-cyan-100 text-cyan-600" },
-  teal: { bg: "bg-teal-50/50", border: "border-teal-100", badge: "bg-teal-100 text-teal-600" },
+  blue: { bg: "bg-blue-50/50 dark:bg-blue-500/10", border: "border-blue-100 dark:border-blue-500/20", badge: "bg-blue-100 dark:bg-blue-500/20 text-blue-600" },
+  indigo: { bg: "bg-indigo-50/50 dark:bg-indigo-500/10", border: "border-indigo-100 dark:border-indigo-500/20", badge: "bg-indigo-100 dark:bg-indigo-500/20 text-indigo-600" },
+  violet: { bg: "bg-violet-50/50 dark:bg-violet-500/10", border: "border-violet-100 dark:border-violet-500/20", badge: "bg-violet-100 dark:bg-violet-500/20 text-violet-600" },
+  cyan: { bg: "bg-cyan-50/50 dark:bg-cyan-500/10", border: "border-cyan-100 dark:border-cyan-500/20", badge: "bg-cyan-100 dark:bg-cyan-500/20 text-cyan-600" },
+  teal: { bg: "bg-teal-50/50 dark:bg-teal-500/10", border: "border-teal-100 dark:border-teal-500/20", badge: "bg-teal-100 dark:bg-teal-500/20 text-teal-600" },
 };
 
 function InsightBlock({ step, title, content, color }: { step: number; title: string; content: string; color: string }) {
@@ -221,9 +221,9 @@ function InsightBlock({ step, title, content, color }: { step: number; title: st
         <span className={`w-5 h-5 rounded-md ${c.badge} flex items-center justify-center text-[10px] font-bold`}>
           {step}
         </span>
-        <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider">{title}</h4>
+        <h4 className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">{title}</h4>
       </div>
-      <p className="px-3 py-2.5 text-sm text-gray-700 leading-relaxed">{content}</p>
+      <p className="px-3 py-2.5 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{content}</p>
     </div>
   );
 }

@@ -11,28 +11,28 @@ export default function PriceBar({ quote, source, marketOpen }: PriceBarProps) {
   const isPositive = quote.change >= 0;
 
   return (
-    <div className="px-6 py-4 bg-white/70 backdrop-blur-md border-b border-gray-100">
+    <div className="px-6 py-4 bg-white/70 dark:bg-slate-900/80 backdrop-blur-md border-b border-gray-100 dark:border-slate-700">
       <div className="flex flex-wrap items-center justify-between gap-4 max-w-[1600px] mx-auto">
         {/* Left: Name + Price */}
         <div className="flex items-center gap-8">
           <div>
             <div className="flex items-center gap-3">
-              <h1 className="text-xl font-extrabold text-gray-900 tracking-tight" style={{ fontFamily: 'Plus Jakarta Sans' }}>
+              <h1 className="text-xl font-extrabold text-gray-900 dark:text-gray-100 tracking-tight" style={{ fontFamily: 'Plus Jakarta Sans' }}>
                 {quote.name}
               </h1>
-              <span className="px-2 py-0.5 bg-gray-100 rounded-md text-xs font-semibold text-gray-500">
+              <span className="px-2 py-0.5 bg-gray-100 dark:bg-slate-800 rounded-md text-xs font-semibold text-gray-500 dark:text-gray-400">
                 {quote.symbol}
               </span>
             </div>
-            <span className="text-xs text-gray-400">{quote.exchange}</span>
+            <span className="text-xs text-gray-400 dark:text-gray-500">{quote.exchange}</span>
           </div>
 
           <div className="flex items-baseline gap-3">
-            <span className="text-4xl font-extrabold text-gray-900 tracking-tighter" style={{ fontFamily: 'Plus Jakarta Sans' }}>
+            <span className="text-4xl font-extrabold text-gray-900 dark:text-gray-100 tracking-tighter" style={{ fontFamily: 'Plus Jakarta Sans' }}>
               ₹{quote.price?.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
             </span>
             <div className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-sm font-bold ${
-              isPositive ? "bg-emerald-50 text-emerald-600" : "bg-red-50 text-red-600"
+              isPositive ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600" : "bg-red-50 dark:bg-red-500/10 text-red-600"
             }`}>
               <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d={isPositive ? "M4.5 19.5l15-15" : "M4.5 4.5l15 15"} />
@@ -51,7 +51,7 @@ export default function PriceBar({ quote, source, marketOpen }: PriceBarProps) {
             <OHLCItem label="Vol" value={formatVolume(quote.volume)} />
           </div>
 
-          <div className="w-px h-10 bg-gray-200" />
+          <div className="w-px h-10 bg-gray-200 dark:bg-slate-700" />
 
           <div className="flex flex-col items-end gap-1.5">
             <SourceBadge source={source} />
@@ -67,10 +67,10 @@ export default function PriceBar({ quote, source, marketOpen }: PriceBarProps) {
   );
 }
 
-function OHLCItem({ label, value, color = "text-gray-900" }: { label: string; value: string; color?: string }) {
+function OHLCItem({ label, value, color = "text-gray-900 dark:text-gray-100" }: { label: string; value: string; color?: string }) {
   return (
     <div className="text-center">
-      <div className="text-[10px] text-gray-400 font-semibold uppercase tracking-wider">{label}</div>
+      <div className="text-[10px] text-gray-400 dark:text-gray-500 font-semibold uppercase tracking-wider">{label}</div>
       <div className={`text-sm font-bold ${color} mt-0.5`}>{value}</div>
     </div>
   );

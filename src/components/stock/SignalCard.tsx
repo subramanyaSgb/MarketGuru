@@ -11,14 +11,14 @@ interface SignalCardProps {
 export default function SignalCard({ analysis, loading, previousSignal, marketOpen }: SignalCardProps) {
   if (loading) {
     return (
-      <div className="relative p-6 bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-100/50 to-transparent animate-[shimmer_2s_infinite]" />
+      <div className="relative p-6 bg-white dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-700 shadow-sm overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-100/50 dark:via-slate-800/50 to-transparent animate-[shimmer_2s_infinite]" />
         <div className="flex items-center gap-6">
-          <div className="w-20 h-20 bg-gray-100 rounded-2xl" />
+          <div className="w-20 h-20 bg-gray-100 dark:bg-slate-800 rounded-2xl" />
           <div className="flex-1 space-y-3">
-            <div className="h-4 bg-gray-100 rounded-lg w-1/3" />
-            <div className="h-3 bg-gray-100 rounded-lg w-2/3" />
-            <div className="h-3 bg-gray-100 rounded-lg w-1/2" />
+            <div className="h-4 bg-gray-100 dark:bg-slate-800 rounded-lg w-1/3" />
+            <div className="h-3 bg-gray-100 dark:bg-slate-800 rounded-lg w-2/3" />
+            <div className="h-3 bg-gray-100 dark:bg-slate-800 rounded-lg w-1/2" />
           </div>
         </div>
       </div>
@@ -72,7 +72,7 @@ export default function SignalCard({ analysis, loading, previousSignal, marketOp
           {/* Signal Badge + Confidence Ring */}
           <div className="relative flex-shrink-0">
             <svg className="w-20 h-20 -rotate-90" viewBox="0 0 64 64">
-              <circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" strokeWidth="3" className="text-gray-100" />
+              <circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" strokeWidth="3" className="text-gray-100 dark:text-slate-700" />
               <circle cx="32" cy="32" r="28" fill="none" strokeWidth="3" strokeLinecap="round"
                 className={confidenceColor}
                 style={{ strokeDasharray: circumference, strokeDashoffset: offset, transition: 'stroke-dashoffset 1s ease' }}
@@ -85,22 +85,22 @@ export default function SignalCard({ analysis, loading, previousSignal, marketOp
 
           {/* Confidence + Risk */}
           <div className="flex-shrink-0">
-            <div className="text-3xl font-extrabold text-gray-900" style={{ fontFamily: 'Plus Jakarta Sans' }}>
-              {rec.confidence}<span className="text-lg text-gray-400 font-medium">%</span>
+            <div className="text-3xl font-extrabold text-gray-900 dark:text-gray-100" style={{ fontFamily: 'Plus Jakarta Sans' }}>
+              {rec.confidence}<span className="text-lg text-gray-400 dark:text-gray-500 font-medium">%</span>
             </div>
-            <div className="text-xs text-gray-500 font-medium">Confidence</div>
+            <div className="text-xs text-gray-500 dark:text-gray-400 font-medium">Confidence</div>
             <div className="mt-1.5 flex items-center gap-1.5">
               <div className="flex gap-0.5">
                 {Array.from({ length: 10 }).map((_, i) => (
-                  <div key={i} className={`w-1.5 h-3 rounded-full ${i < risk_score ? (risk_score <= 3 ? "bg-emerald-400" : risk_score <= 6 ? "bg-amber-400" : "bg-red-400") : "bg-gray-200"}`} />
+                  <div key={i} className={`w-1.5 h-3 rounded-full ${i < risk_score ? (risk_score <= 3 ? "bg-emerald-400" : risk_score <= 6 ? "bg-amber-400" : "bg-red-400") : "bg-gray-200 dark:bg-slate-700"}`} />
                 ))}
               </div>
-              <span className="text-[10px] text-gray-500 font-medium">{risk_label}</span>
+              <span className="text-[10px] text-gray-500 dark:text-gray-400 font-medium">{risk_label}</span>
             </div>
           </div>
 
           {/* Divider */}
-          <div className="w-px h-16 bg-gray-200/80 hidden md:block" />
+          <div className="w-px h-16 bg-gray-200/80 dark:bg-slate-700 hidden md:block" />
 
           {/* Trade Details */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-3 flex-1">
@@ -129,9 +129,9 @@ export default function SignalCard({ analysis, loading, previousSignal, marketOp
 
         {/* Risk-Reward */}
         {rec.risk_reward && (
-          <div className="mt-4 pt-3 border-t border-gray-200/50 flex items-center gap-2 text-sm">
-            <span className="text-gray-400">Risk-Reward</span>
-            <span className="font-bold text-gray-900 bg-gray-100 px-2 py-0.5 rounded-md">{rec.risk_reward}</span>
+          <div className="mt-4 pt-3 border-t border-gray-200/50 dark:border-slate-700 flex items-center gap-2 text-sm">
+            <span className="text-gray-400 dark:text-gray-500">Risk-Reward</span>
+            <span className="font-bold text-gray-900 dark:text-gray-100 bg-gray-100 dark:bg-slate-800 px-2 py-0.5 rounded-md">{rec.risk_reward}</span>
           </div>
         )}
       </div>
@@ -139,10 +139,10 @@ export default function SignalCard({ analysis, loading, previousSignal, marketOp
   );
 }
 
-function TradeDetail({ label, value, valueClass = "text-gray-900" }: { label: string; value: string; valueClass?: string }) {
+function TradeDetail({ label, value, valueClass = "text-gray-900 dark:text-gray-100" }: { label: string; value: string; valueClass?: string }) {
   return (
     <div>
-      <div className="text-[10px] text-gray-400 font-semibold uppercase tracking-wider mb-0.5">{label}</div>
+      <div className="text-[10px] text-gray-400 dark:text-gray-500 font-semibold uppercase tracking-wider mb-0.5">{label}</div>
       <div className={`text-sm font-bold ${valueClass}`}>{value}</div>
     </div>
   );

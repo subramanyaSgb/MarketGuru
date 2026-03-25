@@ -108,15 +108,15 @@ export default function StockPage() {
 
   if (loadingData && !quote) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-blue-50/30 dark:from-[#0b1121] dark:via-[#0f172a] dark:to-[#0b1121]">
         <div className="text-center">
           <div className="relative w-16 h-16 mx-auto mb-6">
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 animate-pulse" />
-            <div className="absolute inset-[3px] rounded-xl bg-white flex items-center justify-center">
+            <div className="absolute inset-[3px] rounded-xl bg-white dark:bg-slate-900 flex items-center justify-center">
               <span className="text-blue-600 font-bold text-sm" style={{ fontFamily: 'Plus Jakarta Sans' }}>MG</span>
             </div>
           </div>
-          <p className="text-gray-500 font-medium">Loading {symbol}...</p>
+          <p className="text-gray-500 dark:text-gray-400 font-medium">Loading {symbol}...</p>
           <div className="mt-3 flex justify-center gap-1">
             {[0, 1, 2].map(i => (
               <div key={i} className="w-2 h-2 rounded-full bg-blue-400 animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
@@ -132,21 +132,21 @@ export default function StockPage() {
       {/* Animated background */}
       <div className="fixed inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 dark:from-[#0b1121] dark:via-[#0f172a] dark:to-[#0b1121]" />
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/20 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-100/15 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
-        <div className="absolute top-1/2 left-1/2 w-[400px] h-[400px] bg-violet-100/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }} />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/20 dark:bg-blue-500/5 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-100/15 dark:bg-indigo-500/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-1/2 w-[400px] h-[400px] bg-violet-100/10 dark:bg-violet-500/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }} />
         {/* Subtle grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:6rem_6rem] opacity-20" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:6rem_6rem] opacity-20 dark:opacity-5" />
       </div>
 
       {/* Top navigation bar */}
-      <div className="sticky top-0 z-40 bg-white/70 backdrop-blur-xl border-b border-gray-200/50">
+      <div className="sticky top-0 z-40 bg-white/70 dark:bg-slate-900/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-slate-700">
         <div className="max-w-[1600px] mx-auto px-4 py-2.5 flex items-center gap-4">
           <button
             onClick={() => router.push("/")}
-            className="p-2 hover:bg-gray-100 rounded-xl transition-all active:scale-95"
+            className="p-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-xl transition-all active:scale-95"
           >
-            <svg className="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+            <svg className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
             </svg>
           </button>
@@ -154,7 +154,7 @@ export default function StockPage() {
             <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center">
               <span className="text-white font-bold text-[10px]">MG</span>
             </div>
-            <span className="text-base font-bold text-gray-900" style={{ fontFamily: 'Plus Jakarta Sans' }}>
+            <span className="text-base font-bold text-gray-900 dark:text-gray-100" style={{ fontFamily: 'Plus Jakarta Sans' }}>
               Market<span className="text-blue-600">Guru</span>
             </span>
           </div>
@@ -171,7 +171,7 @@ export default function StockPage() {
       {/* Error banner */}
       {error && (
         <div className="max-w-[1600px] mx-auto px-4 mt-4">
-          <div className="px-4 py-2.5 bg-red-50 border border-red-200 rounded-xl text-sm text-red-600 flex items-center gap-2">
+          <div className="px-4 py-2.5 bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 rounded-xl text-sm text-red-600 flex items-center gap-2">
             <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
             </svg>
@@ -190,10 +190,10 @@ export default function StockPage() {
           {/* Timeframe section header */}
           {analysis?.multi_timeframe && (
             <div className="flex items-center gap-3">
-              <h2 className="text-sm font-bold text-gray-900 uppercase tracking-wider" style={{ fontFamily: 'Plus Jakarta Sans' }}>
+              <h2 className="text-sm font-bold text-gray-900 dark:text-gray-100 uppercase tracking-wider" style={{ fontFamily: 'Plus Jakarta Sans' }}>
                 Timeframe Analysis
               </h2>
-              <div className="flex-1 h-px bg-gray-200" />
+              <div className="flex-1 h-px bg-gray-200 dark:bg-slate-700" />
             </div>
           )}
           <TimeframeCards analysis={analysis} loading={loadingAI && !analysis} />
@@ -206,8 +206,8 @@ export default function StockPage() {
       </div>
 
       {/* Disclaimer bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-30 bg-white/80 backdrop-blur-md border-t border-gray-200/50 px-4 py-2 text-center">
-        <p className="text-[11px] text-gray-400 font-medium">
+      <div className="fixed bottom-0 left-0 right-0 z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-t border-gray-200/50 dark:border-slate-700 px-4 py-2 text-center">
+        <p className="text-[11px] text-gray-400 dark:text-gray-500 font-medium">
           AI-generated analysis for educational purposes only. Not investment advice. MarketGuru is not SEBI registered.
         </p>
       </div>

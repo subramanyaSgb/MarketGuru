@@ -46,12 +46,12 @@ export default function TrustSection() {
         {/* Stats bar */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
           {stats.map((s) => (
-            <div key={s.label} className="text-center p-6 rounded-2xl bg-slate-50 border border-slate-100">
-              <div className="text-3xl font-extrabold text-gray-900" style={{ fontFamily: 'Plus Jakarta Sans' }}>
+            <div key={s.label} className="text-center p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
+              <div className="text-3xl font-extrabold text-gray-900 dark:text-gray-100" style={{ fontFamily: 'Plus Jakarta Sans' }}>
                 <CountUp to={s.value} duration={2.5} separator="," />
                 <span className="text-blue-600">{s.suffix}</span>
               </div>
-              <div className="text-sm text-gray-500 mt-1 font-medium">{s.label}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400 mt-1 font-medium">{s.label}</div>
             </div>
           ))}
         </div>
@@ -59,7 +59,7 @@ export default function TrustSection() {
         {/* Feature cards */}
         <div className="text-center mb-12">
           <span className="text-sm font-semibold text-blue-600 uppercase tracking-wider">Features</span>
-          <h2 className="text-4xl font-bold text-gray-900 mt-3" style={{ fontFamily: 'Plus Jakarta Sans' }}>
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mt-3" style={{ fontFamily: 'Plus Jakarta Sans' }}>
             Why MarketGuru?
           </h2>
         </div>
@@ -67,11 +67,11 @@ export default function TrustSection() {
           {features.map((f) => (
             <SpotlightCard key={f.title} className="p-8 card-hover" spotlightColor="rgba(37, 99, 235, 0.08)">
               <div className="relative z-10">
-                <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 mb-5">
+                <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-100 dark:border-blue-500/20 flex items-center justify-center text-blue-600 mb-5">
                   {f.icon}
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2" style={{ fontFamily: 'Plus Jakarta Sans' }}>{f.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
+                <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2" style={{ fontFamily: 'Plus Jakarta Sans' }}>{f.title}</h3>
+                <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{f.desc}</p>
               </div>
             </SpotlightCard>
           ))}

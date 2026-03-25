@@ -42,14 +42,14 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-24 px-6 bg-gradient-to-b from-slate-50 to-white">
+    <section id="how-it-works" className="py-24 px-6 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-[#0b1121]">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <span className="text-sm font-semibold text-blue-600 uppercase tracking-wider">Simple Process</span>
-          <h2 className="text-4xl font-bold text-gray-900 mt-3" style={{ fontFamily: 'Plus Jakarta Sans' }}>
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mt-3" style={{ fontFamily: 'Plus Jakarta Sans' }}>
             How It Works
           </h2>
-          <p className="text-gray-500 mt-4 max-w-lg mx-auto">Three simple steps to get expert-level trading insights</p>
+          <p className="text-gray-500 dark:text-gray-400 mt-4 max-w-lg mx-auto">Three simple steps to get expert-level trading insights</p>
         </div>
         <div className="grid md:grid-cols-3 gap-6">
           {steps.map((s, i) => (
@@ -62,9 +62,9 @@ export default function HowItWorks() {
                 <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${s.color} flex items-center justify-center text-white mb-6 shadow-lg`}>
                   {s.icon}
                 </div>
-                <span className="text-xs font-bold text-gray-300 uppercase tracking-widest">Step {s.num}</span>
-                <h3 className="text-xl font-bold text-gray-900 mt-2 mb-3" style={{ fontFamily: 'Plus Jakarta Sans' }}>{s.title}</h3>
-                <p className="text-gray-500 leading-relaxed text-sm">{s.desc}</p>
+                <span className="text-xs font-bold text-gray-300 dark:text-gray-600 uppercase tracking-widest">Step {s.num}</span>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mt-2 mb-3" style={{ fontFamily: 'Plus Jakarta Sans' }}>{s.title}</h3>
+                <p className="text-gray-500 dark:text-gray-400 leading-relaxed text-sm">{s.desc}</p>
               </div>
             </SpotlightCard>
           ))}
