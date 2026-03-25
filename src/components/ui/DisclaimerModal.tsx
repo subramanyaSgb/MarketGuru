@@ -1,0 +1,47 @@
+"use client";
+import { useState, useEffect } from "react";
+
+export default function DisclaimerModal() {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const acknowledged = localStorage.getItem("mg-disclaimer-ack");
+    if (!acknowledged) setShow(true);
+  }, []);
+
+  const handleAccept = () => {
+    localStorage.setItem("mg-disclaimer-ack", "true");
+    setShow(false);
+  };
+
+  if (!show) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl max-w-lg w-full p-8 shadow-2xl">
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">Before You Begin</h2>
+        <p className="text-gray-600 mb-6">Please acknowledge the following to continue:</p>
+        <ul className="space-y-3 mb-8">
+          <li className="flex items-start gap-3">
+            <span className="w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs mt-0.5">1</span>
+            <span className="text-gray-700">I understand MarketGuru provides AI-generated educational analysis</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs mt-0.5">2</span>
+            <span className="text-gray-700">I will not treat signals as guaranteed financial advice</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs mt-0.5">3</span>
+            <span className="text-gray-700">I am responsible for my own trading decisions</span>
+          </li>
+        </ul>
+        <button
+          onClick={handleAccept}
+          className="w-full py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors"
+        >
+          I Understand, Continue
+        </button>
+      </div>
+    </div>
+  );
+}
