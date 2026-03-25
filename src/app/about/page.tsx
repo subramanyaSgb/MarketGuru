@@ -135,21 +135,10 @@ export default function AboutPage() {
                 Deevia Software India Pvt. Ltd., Bengaluru
               </p>
 
-              {/* Profile photo */}
-              <div className="flex justify-center lg:justify-start mb-6 lg:hidden">
-                <div className="relative">
-                  <div className="w-32 h-32 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 p-[3px] shadow-xl shadow-blue-500/20">
-                    <img
-                      src="https://media.licdn.com/dms/image/v2/D5603AQFcUOUfxaqXLg/profile-displayphoto-shrink_400_400/B56ZbzxPhuGcAg-/0/1747987277424?e=1753920000&v=beta&t=rZUl0P9WlWNO8w_gOuPc3TptKSGm71nYd_gQIoAbWPg"
-                      alt="Subramanya Gopal Bellary"
-                      className="w-full h-full rounded-[13px] object-cover"
-                    />
-                  </div>
-                  <div className="absolute -bottom-2 -right-2 w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center shadow-lg">
-                    <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                    </svg>
-                  </div>
+              {/* Lanyard on mobile */}
+              <div className="flex justify-center mb-6 lg:hidden">
+                <div className="w-full h-[350px] rounded-2xl overflow-hidden">
+                  <Lanyard position={[0, 0, 20]} fov={30} />
                 </div>
               </div>
 
@@ -167,36 +156,14 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* Right: Profile photo (desktop) */}
-            <div className="hidden lg:block relative">
-              <div className="w-48 h-48 rounded-3xl bg-gradient-to-br from-blue-500 to-indigo-600 p-[3px] shadow-2xl shadow-blue-500/25">
-                <img
-                  src="https://media.licdn.com/dms/image/v2/D5603AQFcUOUfxaqXLg/profile-displayphoto-shrink_400_400/B56ZbzxPhuGcAg-/0/1747987277424?e=1753920000&v=beta&t=rZUl0P9WlWNO8w_gOuPc3TptKSGm71nYd_gQIoAbWPg"
-                  alt="Subramanya Gopal Bellary"
-                  className="w-full h-full rounded-[21px] object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-3 -right-3 w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center shadow-lg">
-                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                </svg>
-              </div>
+            {/* Right: Lanyard (desktop) */}
+            <div className="hidden lg:block w-[350px] h-[450px] rounded-2xl overflow-hidden">
+              <Lanyard position={[0, 0, 22]} fov={26} />
             </div>
           </div>
         </div>
       </section>
 
-      {/* 3D Lanyard Badge */}
-      <section className="relative -mt-8 mb-8">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-4">
-            <span className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">
-              Drag the badge to interact
-            </span>
-          </div>
-          <Lanyard />
-        </div>
-      </section>
 
       {/* Stats */}
       <section className="px-4 md:px-6 -mt-8">
