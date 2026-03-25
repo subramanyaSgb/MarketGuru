@@ -158,7 +158,7 @@ export default function StockPage() {
               Market<span className="text-blue-600">Guru</span>
             </span>
           </div>
-          <div className="flex-1 max-w-sm ml-4">
+          <div className="hidden sm:block flex-1 max-w-sm ml-4">
             <SearchBar size="sm" />
           </div>
           <ThemeToggle />
@@ -181,9 +181,9 @@ export default function StockPage() {
       )}
 
       {/* Main content */}
-      <div className="flex flex-col lg:flex-row gap-5 p-5 max-w-[1600px] mx-auto pb-16">
+      <div className="flex flex-col lg:flex-row gap-3 md:gap-5 p-3 md:p-5 max-w-[1600px] mx-auto pb-16">
         {/* Left: Signal + Chart + Timeframe */}
-        <div className="flex-1 lg:w-[70%] space-y-5">
+        <div className="flex-1 lg:w-[70%] space-y-3 md:space-y-5">
           <SignalCard analysis={analysis} loading={loadingAI && !analysis} previousSignal={previousSignal} marketOpen={marketOpen} />
           <LiveChart candles={candles} timeframe={timeframe} onTimeframeChange={setTimeframe} />
 
@@ -200,7 +200,7 @@ export default function StockPage() {
         </div>
 
         {/* Right: AI Panel */}
-        <div className="lg:w-[30%] lg:sticky lg:top-16 lg:self-start" style={{ maxHeight: 'calc(100vh - 5rem)' }}>
+        <div className="w-full lg:w-[30%] lg:sticky lg:top-16 lg:self-start lg:max-h-[calc(100vh-5rem)]">
           <AIThinkingPanel analysis={analysis} loading={loadingAI && !analysis} />
         </div>
       </div>

@@ -30,6 +30,8 @@ export default function LiveChart({ candles, timeframe, onTimeframeChange }: Liv
     // Check dark mode
     const isDark = document.documentElement.classList.contains('dark');
 
+    const chartHeight = window.innerWidth < 640 ? 300 : 400;
+
     const chart = createChart(chartContainerRef.current, {
       layout: {
         background: { type: ColorType.Solid, color: isDark ? "#111827" : "#FFFFFF" },
@@ -40,7 +42,7 @@ export default function LiveChart({ candles, timeframe, onTimeframeChange }: Liv
         horzLines: { color: isDark ? "#1e293b" : "#F1F5F9" },
       },
       width: chartContainerRef.current.clientWidth,
-      height: 400,
+      height: chartHeight,
       crosshair: {
         mode: 0,
       },
@@ -68,7 +70,8 @@ export default function LiveChart({ candles, timeframe, onTimeframeChange }: Liv
 
     const handleResize = () => {
       if (chartContainerRef.current) {
-        chart.applyOptions({ width: chartContainerRef.current.clientWidth });
+        const newHeight = window.innerWidth < 640 ? 300 : 400;
+        chart.applyOptions({ width: chartContainerRef.current.clientWidth, height: newHeight });
       }
     };
     window.addEventListener("resize", handleResize);
@@ -108,7 +111,7 @@ export default function LiveChart({ candles, timeframe, onTimeframeChange }: Liv
             <button
               key={tf}
               onClick={() => onTimeframeChange(tf)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              className={`px-2 py-1 md:px-3 md:py-1.5 rounded-lg text-[11px] md:text-xs font-bold transition-all ${
                 timeframe === tf
                   ? "bg-white dark:bg-slate-700 text-blue-600 shadow-sm"
                   : "text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"

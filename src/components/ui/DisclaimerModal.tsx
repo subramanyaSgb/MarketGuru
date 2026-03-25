@@ -18,8 +18,8 @@ export default function DisclaimerModal() {
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-xl z-[100] flex items-center justify-center p-4">
-      <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-8 shadow-2xl ring-1 ring-gray-200 dark:ring-slate-700 bg-gradient-to-b from-white to-gray-50/80 dark:from-slate-900 dark:to-slate-800/80">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Before You Begin</h2>
+      <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-sm md:max-w-lg w-full mx-4 p-5 md:p-8 shadow-2xl ring-1 ring-gray-200 dark:ring-slate-700 bg-gradient-to-b from-white to-gray-50/80 dark:from-slate-900 dark:to-slate-800/80">
+        <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Before You Begin</h2>
         <p className="text-gray-600 dark:text-gray-400 mb-6">Please acknowledge the following to continue:</p>
         <ul className="space-y-3 mb-8">
           <li className="flex items-start gap-3">

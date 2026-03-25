@@ -41,7 +41,7 @@ const features = [
 
 export default function TrustSection() {
   return (
-    <section id="about" className="py-24 px-6">
+    <section id="about" className="py-16 md:py-24 px-4 md:px-6">
       <div className="max-w-5xl mx-auto">
         {/* Stats bar */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
@@ -59,7 +59,7 @@ export default function TrustSection() {
         {/* Feature cards */}
         <div className="text-center mb-12">
           <span className="text-sm font-semibold text-blue-600 uppercase tracking-wider">Features</span>
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mt-3" style={{ fontFamily: 'Plus Jakarta Sans' }}>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mt-3" style={{ fontFamily: 'Plus Jakarta Sans' }}>
             Why MarketGuru?
           </h2>
         </div>

@@ -42,11 +42,11 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-24 px-6 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-[#0b1121]">
+    <section id="how-it-works" className="py-16 md:py-24 px-4 md:px-6 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-[#0b1121]">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <span className="text-sm font-semibold text-blue-600 uppercase tracking-wider">Simple Process</span>
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mt-3" style={{ fontFamily: 'Plus Jakarta Sans' }}>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mt-3" style={{ fontFamily: 'Plus Jakarta Sans' }}>
             How It Works
           </h2>
           <p className="text-gray-500 dark:text-gray-400 mt-4 max-w-lg mx-auto">Three simple steps to get expert-level trading insights</p>

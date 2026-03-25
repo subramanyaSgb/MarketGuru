@@ -67,43 +67,46 @@ export default function SignalCard({ analysis, loading, previousSignal, marketOp
         </div>
       )}
 
-      <div className="p-5">
-        <div className="flex items-center gap-6">
-          {/* Signal Badge + Confidence Ring */}
-          <div className="relative flex-shrink-0">
-            <svg className="w-20 h-20 -rotate-90" viewBox="0 0 64 64">
-              <circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" strokeWidth="3" className="text-gray-100 dark:text-slate-700" />
-              <circle cx="32" cy="32" r="28" fill="none" strokeWidth="3" strokeLinecap="round"
-                className={confidenceColor}
-                style={{ strokeDasharray: circumference, strokeDashoffset: offset, transition: 'stroke-dashoffset 1s ease' }}
-              />
-            </svg>
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <Badge variant={variant} size="sm">{signal}</Badge>
-            </div>
-          </div>
-
-          {/* Confidence + Risk */}
-          <div className="flex-shrink-0">
-            <div className="text-3xl font-extrabold text-gray-900 dark:text-gray-100" style={{ fontFamily: 'Plus Jakarta Sans' }}>
-              {rec.confidence}<span className="text-lg text-gray-400 dark:text-gray-500 font-medium">%</span>
-            </div>
-            <div className="text-xs text-gray-500 dark:text-gray-400 font-medium">Confidence</div>
-            <div className="mt-1.5 flex items-center gap-1.5">
-              <div className="flex gap-0.5">
-                {Array.from({ length: 10 }).map((_, i) => (
-                  <div key={i} className={`w-1.5 h-3 rounded-full ${i < risk_score ? (risk_score <= 3 ? "bg-emerald-400" : risk_score <= 6 ? "bg-amber-400" : "bg-red-400") : "bg-gray-200 dark:bg-slate-700"}`} />
-                ))}
+      <div className="p-4 md:p-5">
+        <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
+          {/* Signal Badge + Confidence Ring + Risk */}
+          <div className="flex items-center gap-4 md:gap-6">
+            <div className="relative flex-shrink-0">
+              <svg className="w-16 h-16 md:w-20 md:h-20 -rotate-90" viewBox="0 0 64 64">
+                <circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" strokeWidth="3" className="text-gray-100 dark:text-slate-700" />
+                <circle cx="32" cy="32" r="28" fill="none" strokeWidth="3" strokeLinecap="round"
+                  className={confidenceColor}
+                  style={{ strokeDasharray: circumference, strokeDashoffset: offset, transition: 'stroke-dashoffset 1s ease' }}
+                />
+              </svg>
+              <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <Badge variant={variant} size="sm">{signal}</Badge>
               </div>
-              <span className="text-[10px] text-gray-500 dark:text-gray-400 font-medium">{risk_label}</span>
+            </div>
+
+            {/* Confidence + Risk */}
+            <div className="flex-shrink-0">
+              <div className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-gray-100" style={{ fontFamily: 'Plus Jakarta Sans' }}>
+                {rec.confidence}<span className="text-base md:text-lg text-gray-400 dark:text-gray-500 font-medium">%</span>
+              </div>
+              <div className="text-xs text-gray-500 dark:text-gray-400 font-medium">Confidence</div>
+              <div className="mt-1.5 flex items-center gap-1.5">
+                <div className="flex gap-0.5">
+                  {Array.from({ length: 10 }).map((_, i) => (
+                    <div key={i} className={`w-1.5 h-3 rounded-full ${i < risk_score ? (risk_score <= 3 ? "bg-emerald-400" : risk_score <= 6 ? "bg-amber-400" : "bg-red-400") : "bg-gray-200 dark:bg-slate-700"}`} />
+                  ))}
+                </div>
+                <span className="text-[10px] text-gray-500 dark:text-gray-400 font-medium">{risk_label}</span>
+              </div>
             </div>
           </div>
 
           {/* Divider */}
           <div className="w-px h-16 bg-gray-200/80 dark:bg-slate-700 hidden md:block" />
+          <div className="h-px w-full bg-gray-200/80 dark:bg-slate-700 md:hidden" />
 
           {/* Trade Details */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-3 flex-1">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 md:gap-x-8 gap-y-3 flex-1">
             <TradeDetail
               label="Entry Price"
               value={rec.entry_price ? `₹${rec.entry_price.toLocaleString("en-IN")}` : "At Market"}

@@ -70,7 +70,7 @@ export default function AboutPage() {
     <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-[#0b1121] dark:via-[#0f172a] dark:to-[#0b1121]">
       {/* Back button */}
       <div className="sticky top-0 z-40 bg-white/70 dark:bg-slate-900/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-slate-700">
-        <div className="max-w-5xl mx-auto px-6 py-3 flex items-center gap-4">
+        <div className="max-w-5xl mx-auto px-4 md:px-6 py-3 flex items-center gap-4">
           <Link
             href="/"
             className="p-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-xl transition-all active:scale-95"
@@ -91,7 +91,7 @@ export default function AboutPage() {
       </div>
 
       {/* Hero */}
-      <section className="relative py-24 px-6 overflow-hidden">
+      <section className="relative py-16 md:py-24 px-4 md:px-6 overflow-hidden">
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/10 dark:bg-blue-500/5 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-indigo-400/10 dark:bg-indigo-500/5 rounded-full blur-3xl" />
 
@@ -109,20 +109,20 @@ export default function AboutPage() {
             className="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-gray-100 leading-tight mb-4 justify-center"
           />
 
-          <p className="text-xl text-gray-500 dark:text-gray-400 mb-2" style={{ fontFamily: 'DM Sans' }}>
+          <p className="text-lg md:text-xl text-gray-500 dark:text-gray-400 mb-2" style={{ fontFamily: 'DM Sans' }}>
             Technical Lead &middot; Software Engineer
           </p>
-          <p className="text-lg text-gray-400 dark:text-gray-500 mb-2" style={{ fontFamily: 'DM Sans' }}>
+          <p className="text-base md:text-lg text-gray-400 dark:text-gray-500 mb-2" style={{ fontFamily: 'DM Sans' }}>
             Computer Vision & Industrial AI
           </p>
-          <p className="text-base text-gray-400 dark:text-gray-500" style={{ fontFamily: 'DM Sans' }}>
+          <p className="text-sm md:text-base text-gray-400 dark:text-gray-500" style={{ fontFamily: 'DM Sans' }}>
             Deevia Software India Pvt. Ltd., Bengaluru
           </p>
         </div>
       </section>
 
       {/* Stats */}
-      <section className="px-6 -mt-8">
+      <section className="px-4 md:px-6 -mt-8">
         <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
           {stats.map((s) => (
             <div key={s.label} className="text-center p-6 rounded-2xl bg-white dark:bg-slate-800/50 border border-gray-100 dark:border-slate-700 shadow-sm">
@@ -137,7 +137,7 @@ export default function AboutPage() {
       </section>
 
       {/* Skills */}
-      <section className="py-20 px-6">
+      <section className="py-14 md:py-20 px-4 md:px-6">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <span className="text-sm font-semibold text-blue-600 uppercase tracking-wider">Tech Stack</span>
@@ -162,7 +162,7 @@ export default function AboutPage() {
       </section>
 
       {/* Experience */}
-      <section className="py-20 px-6 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-[#0b1121]">
+      <section className="py-14 md:py-20 px-4 md:px-6 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-[#0b1121]">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <span className="text-sm font-semibold text-blue-600 uppercase tracking-wider">Career</span>
@@ -172,7 +172,7 @@ export default function AboutPage() {
           </div>
           {experience.map((exp, i) => (
             <div key={i} className="relative max-w-3xl mx-auto">
-              <div className="bg-white dark:bg-slate-800/50 rounded-2xl border border-gray-100 dark:border-slate-700 p-8 shadow-sm">
+              <div className="bg-white dark:bg-slate-800/50 rounded-2xl border border-gray-100 dark:border-slate-700 p-5 md:p-8 shadow-sm">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-6">
                   <div>
                     <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100" style={{ fontFamily: 'Plus Jakarta Sans' }}>
@@ -231,7 +231,7 @@ export default function AboutPage() {
       </section>
 
       {/* Personal Projects */}
-      <section className="py-20 px-6">
+      <section className="py-14 md:py-20 px-4 md:px-6">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <span className="text-sm font-semibold text-blue-600 uppercase tracking-wider">Side Projects</span>
@@ -239,7 +239,7 @@ export default function AboutPage() {
               Personal Projects
             </h2>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {projects.map((p) => (
               <SpotlightCard key={p.name} className="p-6 card-hover" spotlightColor={p.spotlightColor}>
                 <div className="relative z-10">
@@ -258,14 +258,14 @@ export default function AboutPage() {
       </section>
 
       {/* Contact */}
-      <section className="py-20 px-6 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-[#0b1121]">
+      <section className="py-14 md:py-20 px-4 md:px-6 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-[#0b1121]">
         <div className="max-w-3xl mx-auto text-center">
           <span className="text-sm font-semibold text-blue-600 uppercase tracking-wider">Get in Touch</span>
           <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mt-3 mb-10" style={{ fontFamily: 'Plus Jakarta Sans' }}>
             Contact
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <a
               href="mailto:subramanyagbellary@gmail.com"
               className="flex items-center gap-4 p-5 bg-white dark:bg-slate-800/50 rounded-2xl border border-gray-100 dark:border-slate-700 shadow-sm hover:border-blue-200 dark:hover:border-blue-500/30 transition-all group"

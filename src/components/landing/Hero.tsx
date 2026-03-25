@@ -5,7 +5,7 @@ import ShinyText from "@/components/reactbits/ShinyText";
 
 export default function Hero() {
   return (
-    <section id="hero-search" className="relative min-h-[85vh] flex flex-col items-center justify-center px-6 py-24 overflow-hidden hero-gradient">
+    <section id="hero-search" className="relative min-h-[85vh] flex flex-col items-center justify-center px-4 md:px-6 py-16 md:py-24 overflow-hidden hero-gradient">
       {/* Decorative elements */}
       <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl" />
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-indigo-400/10 rounded-full blur-3xl" />
@@ -47,7 +47,7 @@ export default function Hero() {
         </div>
 
         {/* Trust indicators */}
-        <div className="mt-12 flex items-center justify-center gap-8 text-sm text-gray-400 dark:text-gray-500 animate-fade-in-up stagger-5 opacity-0">
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-4 md:gap-8 text-sm text-gray-400 dark:text-gray-500 animate-fade-in-up stagger-5 opacity-0">
           <span className="flex items-center gap-2">
             <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
             Real-time NSE/BSE

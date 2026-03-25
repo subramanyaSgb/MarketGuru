@@ -46,7 +46,7 @@ export default function SearchBar({ size = "lg" }: { size?: "sm" | "lg" }) {
   };
 
   const inputClass = size === "lg"
-    ? "w-full px-6 py-4 text-lg rounded-2xl border-2 border-gray-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 dark:text-gray-100 backdrop-blur-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none shadow-lg dark:placeholder-gray-500"
+    ? "w-full px-4 md:px-6 py-3 md:py-4 text-base md:text-lg rounded-2xl border-2 border-gray-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 dark:text-gray-100 backdrop-blur-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none shadow-lg dark:placeholder-gray-500"
     : "w-full px-4 py-2 text-sm rounded-xl border border-gray-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 dark:text-gray-100 backdrop-blur-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none dark:placeholder-gray-500";
 
   return (
