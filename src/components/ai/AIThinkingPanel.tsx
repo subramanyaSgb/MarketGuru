@@ -11,16 +11,27 @@ export default function AIThinkingPanel({ analysis, loading }: AIThinkingPanelPr
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm h-full flex flex-col">
+    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm h-full flex flex-col overflow-hidden">
+      {/* Header */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between px-4 py-3 border-b border-gray-50 hover:bg-gray-50 transition-colors"
+        className="flex items-center justify-between px-5 py-4 border-b border-gray-50 hover:bg-slate-50/50 transition-colors"
       >
-        <span className="text-sm font-semibold text-gray-900">
-          AI Thinking
-        </span>
+        <div className="flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
+            <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
+            </svg>
+          </div>
+          <span className="text-sm font-bold text-gray-900" style={{ fontFamily: 'Plus Jakarta Sans' }}>
+            AI Thinking
+          </span>
+          {loading && (
+            <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+          )}
+        </div>
         <svg
-          className={`w-4 h-4 text-gray-400 transition-transform ${isOpen ? "rotate-180" : ""}`}
+          className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
           fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"
         >
           <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -28,99 +39,153 @@ export default function AIThinkingPanel({ analysis, loading }: AIThinkingPanelPr
       </button>
 
       {isOpen && (
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
-          {loading && (
+        <div className="flex-1 overflow-y-auto p-4 space-y-3">
+          {loading && !analysis && (
             <div className="space-y-3">
-              <div className="flex items-center gap-2 text-sm text-blue-600">
+              <div className="flex items-center gap-2 text-sm text-blue-600 px-1">
                 <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
-                Analyzing market data...
+                <span className="font-medium">Analyzing market data...</span>
               </div>
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="h-12 bg-gray-100 rounded-xl animate-pulse" />
+              {["Market Context", "Sector Health", "Trend Analysis", "Indicators"].map((label, i) => (
+                <div key={i} className="p-3 bg-slate-50 rounded-xl animate-pulse">
+                  <div className="h-3 bg-gray-200 rounded w-24 mb-2" />
+                  <div className="h-3 bg-gray-200 rounded w-full" />
+                  <div className="h-3 bg-gray-200 rounded w-3/4 mt-1.5" />
+                </div>
               ))}
             </div>
           )}
 
-          {!loading && analysis && (
+          {analysis && (
             <>
+              {/* Step 1: Market Context */}
               <InsightBlock
+                step={1}
                 title="Market Context"
                 content={analysis.market_context}
-                icon="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5"
+                color="blue"
               />
 
+              {/* Step 2: Sector Health */}
               <InsightBlock
+                step={2}
                 title="Sector Health"
                 content={analysis.sector_health}
-                icon="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 0h.008v.008h-.008V7.5z"
+                color="indigo"
               />
 
+              {/* Step 3: Trend */}
               <InsightBlock
+                step={3}
                 title="Trend Analysis"
                 content={analysis.trend}
-                icon="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22"
+                color="violet"
               />
 
-              <div className="bg-gray-50 rounded-xl p-3">
-                <h4 className="text-xs font-semibold text-gray-400 uppercase mb-2">Key Levels</h4>
-                <div className="grid grid-cols-2 gap-2 text-sm">
-                  <div>
-                    <span className="text-gray-500">Support:</span>
-                    <div className="font-medium text-green-600">
-                      {analysis.key_levels?.support?.map((s) => `₹${s.toLocaleString("en-IN")}`).join(", ") || "—"}
+              {/* Step 4: Key Levels */}
+              <div className="rounded-xl border border-gray-100 overflow-hidden">
+                <div className="flex items-center gap-2 px-3 py-2 bg-slate-50 border-b border-gray-100">
+                  <StepBadge step={4} />
+                  <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Key Levels</h4>
+                </div>
+                <div className="grid grid-cols-2 gap-px bg-gray-100">
+                  <div className="bg-white p-3">
+                    <span className="text-[10px] font-bold text-emerald-500 uppercase tracking-wider">Support</span>
+                    <div className="mt-1 space-y-0.5">
+                      {analysis.key_levels?.support?.map((s, i) => (
+                        <div key={i} className="text-sm font-semibold text-gray-900">
+                          ₹{s.toLocaleString("en-IN")}
+                        </div>
+                      )) || <span className="text-sm text-gray-400">—</span>}
                     </div>
                   </div>
-                  <div>
-                    <span className="text-gray-500">Resistance:</span>
-                    <div className="font-medium text-red-600">
-                      {analysis.key_levels?.resistance?.map((r) => `₹${r.toLocaleString("en-IN")}`).join(", ") || "—"}
+                  <div className="bg-white p-3">
+                    <span className="text-[10px] font-bold text-red-500 uppercase tracking-wider">Resistance</span>
+                    <div className="mt-1 space-y-0.5">
+                      {analysis.key_levels?.resistance?.map((r, i) => (
+                        <div key={i} className="text-sm font-semibold text-gray-900">
+                          ₹{r.toLocaleString("en-IN")}
+                        </div>
+                      )) || <span className="text-sm text-gray-400">—</span>}
                     </div>
                   </div>
                 </div>
               </div>
 
+              {/* Step 5: Indicators */}
               <InsightBlock
+                step={5}
                 title="Technical Indicators"
                 content={analysis.indicators_summary}
-                icon="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z"
+                color="cyan"
               />
 
+              {/* Step 6: Candle Patterns */}
               <InsightBlock
+                step={6}
                 title="Candlestick Patterns"
                 content={analysis.candle_patterns}
-                icon="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"
+                color="teal"
               />
 
-              <div className="bg-blue-50 rounded-xl p-3">
-                <h4 className="text-xs font-semibold text-blue-400 uppercase mb-2">Expert Reasoning</h4>
-                <ul className="space-y-2">
+              {/* Expert Reasoning */}
+              <div className="rounded-xl border border-blue-100 bg-blue-50/50 overflow-hidden">
+                <div className="flex items-center gap-2 px-3 py-2 bg-blue-50 border-b border-blue-100">
+                  <div className="w-5 h-5 rounded-md bg-blue-500 flex items-center justify-center">
+                    <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+                    </svg>
+                  </div>
+                  <h4 className="text-xs font-bold text-blue-600 uppercase tracking-wider">Expert Reasoning</h4>
+                </div>
+                <ul className="p-3 space-y-2.5">
                   {analysis.reasoning?.map((r, i) => (
-                    <li key={i} className="text-sm text-gray-700 flex items-start gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 shrink-0" />
+                    <li key={i} className="text-sm text-gray-700 flex items-start gap-2.5 leading-relaxed">
+                      <span className="w-5 h-5 rounded-md bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold mt-0.5 shrink-0">
+                        {i + 1}
+                      </span>
                       {r}
                     </li>
                   ))}
                 </ul>
               </div>
 
+              {/* Wisdom */}
               {analysis.wisdom && (
-                <div className="bg-amber-50 rounded-xl p-3 border border-amber-100">
-                  <h4 className="text-xs font-semibold text-amber-500 uppercase mb-1">Trading Wisdom</h4>
-                  <p className="text-sm text-amber-800 italic">&ldquo;{analysis.wisdom}&rdquo;</p>
+                <div className="rounded-xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200/50 p-4">
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-xl leading-none mt-0.5">💡</span>
+                    <div>
+                      <h4 className="text-[10px] font-bold text-amber-600 uppercase tracking-wider mb-1">Trading Wisdom</h4>
+                      <p className="text-sm text-amber-900 italic leading-relaxed">&ldquo;{analysis.wisdom}&rdquo;</p>
+                    </div>
+                  </div>
                 </div>
               )}
 
+              {/* Warning */}
               {analysis.warning && (
-                <div className="bg-red-50 rounded-xl p-3 border border-red-100">
-                  <h4 className="text-xs font-semibold text-red-400 uppercase mb-1">Warning</h4>
-                  <p className="text-sm text-red-700">{analysis.warning}</p>
+                <div className="rounded-xl bg-gradient-to-br from-red-50 to-rose-50 border border-red-200/50 p-4">
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-xl leading-none mt-0.5">⚠️</span>
+                    <div>
+                      <h4 className="text-[10px] font-bold text-red-600 uppercase tracking-wider mb-1">Warning</h4>
+                      <p className="text-sm text-red-800 leading-relaxed">{analysis.warning}</p>
+                    </div>
+                  </div>
                 </div>
               )}
 
+              {/* Did You Know */}
               {analysis.did_you_know && (
-                <div className="bg-purple-50 rounded-xl p-3 border border-purple-100">
-                  <h4 className="text-xs font-semibold text-purple-400 uppercase mb-1">Did You Know?</h4>
-                  <p className="text-sm text-purple-700">{analysis.did_you_know}</p>
+                <div className="rounded-xl bg-gradient-to-br from-violet-50 to-purple-50 border border-violet-200/50 p-4">
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-xl leading-none mt-0.5">📚</span>
+                    <div>
+                      <h4 className="text-[10px] font-bold text-violet-600 uppercase tracking-wider mb-1">Did You Know?</h4>
+                      <p className="text-sm text-violet-800 leading-relaxed">{analysis.did_you_know}</p>
+                    </div>
+                  </div>
                 </div>
               )}
             </>
@@ -131,17 +196,34 @@ export default function AIThinkingPanel({ analysis, loading }: AIThinkingPanelPr
   );
 }
 
-function InsightBlock({ title, content, icon }: { title: string; content: string; icon: string }) {
-  if (!content) return null;
+function StepBadge({ step }: { step: number }) {
   return (
-    <div className="bg-gray-50 rounded-xl p-3">
-      <div className="flex items-center gap-2 mb-1">
-        <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" d={icon} />
-        </svg>
-        <h4 className="text-xs font-semibold text-gray-400 uppercase">{title}</h4>
+    <span className="w-5 h-5 rounded-md bg-gray-200 text-gray-600 flex items-center justify-center text-[10px] font-bold">
+      {step}
+    </span>
+  );
+}
+
+const colorMap: Record<string, { bg: string; border: string; badge: string }> = {
+  blue: { bg: "bg-blue-50/50", border: "border-blue-100", badge: "bg-blue-100 text-blue-600" },
+  indigo: { bg: "bg-indigo-50/50", border: "border-indigo-100", badge: "bg-indigo-100 text-indigo-600" },
+  violet: { bg: "bg-violet-50/50", border: "border-violet-100", badge: "bg-violet-100 text-violet-600" },
+  cyan: { bg: "bg-cyan-50/50", border: "border-cyan-100", badge: "bg-cyan-100 text-cyan-600" },
+  teal: { bg: "bg-teal-50/50", border: "border-teal-100", badge: "bg-teal-100 text-teal-600" },
+};
+
+function InsightBlock({ step, title, content, color }: { step: number; title: string; content: string; color: string }) {
+  if (!content) return null;
+  const c = colorMap[color] || colorMap.blue;
+  return (
+    <div className={`rounded-xl ${c.bg} border ${c.border} overflow-hidden`}>
+      <div className="flex items-center gap-2 px-3 py-2 border-b border-inherit">
+        <span className={`w-5 h-5 rounded-md ${c.badge} flex items-center justify-center text-[10px] font-bold`}>
+          {step}
+        </span>
+        <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider">{title}</h4>
       </div>
-      <p className="text-sm text-gray-700 leading-relaxed">{content}</p>
+      <p className="px-3 py-2.5 text-sm text-gray-700 leading-relaxed">{content}</p>
     </div>
   );
 }
