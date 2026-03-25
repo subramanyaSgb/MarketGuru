@@ -46,8 +46,8 @@ export default function SearchBar({ size = "lg" }: { size?: "sm" | "lg" }) {
   };
 
   const inputClass = size === "lg"
-    ? "w-full px-6 py-4 text-lg rounded-2xl border-2 border-gray-200 focus:border-blue-500 focus:outline-none shadow-lg"
-    : "w-full px-4 py-2 text-sm rounded-xl border border-gray-200 focus:border-blue-500 focus:outline-none";
+    ? "w-full px-6 py-4 text-lg rounded-2xl border-2 border-gray-200 bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none shadow-lg"
+    : "w-full px-4 py-2 text-sm rounded-xl border border-gray-200 bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none";
 
   return (
     <div ref={ref} className="relative w-full max-w-2xl mx-auto">
@@ -64,7 +64,7 @@ export default function SearchBar({ size = "lg" }: { size?: "sm" | "lg" }) {
         </div>
       )}
       {isOpen && results.length > 0 && (
-        <div className="absolute top-full mt-2 w-full bg-white rounded-xl shadow-2xl border border-gray-100 z-50 max-h-80 overflow-y-auto">
+        <div className="absolute top-full mt-2 w-full bg-white/95 backdrop-blur-md rounded-xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] border border-gray-100 z-50 max-h-80 overflow-y-auto">
           {results.map((r) => (
             <button
               key={r.symbol}
@@ -81,7 +81,7 @@ export default function SearchBar({ size = "lg" }: { size?: "sm" | "lg" }) {
         </div>
       )}
       {isOpen && query.length >= 2 && results.length === 0 && !loading && (
-        <div className="absolute top-full mt-2 w-full bg-white rounded-xl shadow-2xl border border-gray-100 z-50 p-4 text-gray-500 text-center">
+        <div className="absolute top-full mt-2 w-full bg-white/95 backdrop-blur-md rounded-xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] border border-gray-100 z-50 p-4 text-gray-500 text-center">
           No stocks found for &quot;{query}&quot;
         </div>
       )}

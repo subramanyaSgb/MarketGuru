@@ -4,6 +4,7 @@ import { useParams, useRouter } from "next/navigation";
 import PriceBar from "@/components/stock/PriceBar";
 import SignalCard from "@/components/stock/SignalCard";
 import LiveChart from "@/components/stock/LiveChart";
+import TimeframeCards from "@/components/stock/TimeframeCards";
 import AIThinkingPanel from "@/components/ai/AIThinkingPanel";
 import SearchBar from "@/components/ui/SearchBar";
 import { StockQuote, CandleData, AIAnalysis } from "@/lib/types";
@@ -160,6 +161,7 @@ export default function StockPage() {
         <div className="flex-1 lg:w-[70%] space-y-4">
           <SignalCard analysis={analysis} loading={loadingAI && !analysis} previousSignal={previousSignal} marketOpen={marketOpen} />
           <LiveChart candles={candles} timeframe={timeframe} onTimeframeChange={setTimeframe} />
+          <TimeframeCards analysis={analysis} loading={loadingAI && !analysis} />
         </div>
 
         {/* Right: AI Panel */}

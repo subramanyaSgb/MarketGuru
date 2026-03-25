@@ -31,7 +31,7 @@ export default function SignalCard({ analysis, loading, previousSignal, marketOp
   const signalChanged = previousSignal && previousSignal !== signal;
 
   return (
-    <div className={`p-6 bg-white rounded-2xl border shadow-sm ${signalChanged ? "ring-2 ring-blue-400 animate-pulse" : "border-gray-100"}`}>
+    <div className={`p-6 rounded-2xl shadow-sm ${signalChanged ? "ring-2 ring-blue-400 animate-pulse" : ""} signal-${variant}`}>
       {/* AMO Banner */}
       {!marketOpen && (
         <div className="mb-4 px-4 py-2 bg-orange-50 border border-orange-200 rounded-xl flex items-center gap-2">
@@ -54,7 +54,7 @@ export default function SignalCard({ analysis, loading, previousSignal, marketOp
         {/* Main Signal */}
         <div className="flex items-center gap-4">
           <div className="flex flex-col items-center gap-1">
-            <Badge variant={variant} pulse={!!signalChanged}>
+            <Badge variant={variant} pulse={!!signalChanged} size="lg">
               {signal}
             </Badge>
             {!marketOpen && (

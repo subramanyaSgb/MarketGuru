@@ -17,8 +17,8 @@ export default function DisclaimerModal() {
   if (!show) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl max-w-lg w-full p-8 shadow-2xl">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-xl z-[100] flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl max-w-lg w-full p-8 shadow-2xl ring-1 ring-gray-200 bg-gradient-to-b from-white to-gray-50/80">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">Before You Begin</h2>
         <p className="text-gray-600 mb-6">Please acknowledge the following to continue:</p>
         <ul className="space-y-3 mb-8">
@@ -37,7 +37,7 @@ export default function DisclaimerModal() {
         </ul>
         <button
           onClick={handleAccept}
-          className="w-full py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors"
+          className="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg shadow-blue-500/25"
         >
           I Understand, Continue
         </button>
