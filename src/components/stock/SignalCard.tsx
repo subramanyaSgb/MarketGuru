@@ -11,12 +11,14 @@ interface SignalCardProps {
 export default function SignalCard({ analysis, loading, previousSignal, marketOpen }: SignalCardProps) {
   if (loading) {
     return (
-      <div className="p-6 bg-white rounded-2xl border border-gray-100 shadow-sm animate-pulse">
-        <div className="flex items-center gap-4">
-          <div className="w-24 h-10 bg-gray-200 rounded-full" />
-          <div className="flex-1 space-y-2">
-            <div className="h-4 bg-gray-200 rounded w-1/2" />
-            <div className="h-4 bg-gray-200 rounded w-1/3" />
+      <div className="relative p-6 bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-100/50 to-transparent animate-[shimmer_2s_infinite]" />
+        <div className="flex items-center gap-6">
+          <div className="w-20 h-20 bg-gray-100 rounded-2xl" />
+          <div className="flex-1 space-y-3">
+            <div className="h-4 bg-gray-100 rounded-lg w-1/3" />
+            <div className="h-3 bg-gray-100 rounded-lg w-2/3" />
+            <div className="h-3 bg-gray-100 rounded-lg w-1/2" />
           </div>
         </div>
       </div>
@@ -25,103 +27,123 @@ export default function SignalCard({ analysis, loading, previousSignal, marketOp
 
   if (!analysis) return null;
 
-  const { recommendation: rec, risk_score, risk_label, multi_timeframe: mtf } = analysis;
+  const { recommendation: rec, risk_score, risk_label } = analysis;
   const signal = rec.signal;
-  const variant = signal === "BUY" ? "buy" : signal === "SELL" ? "sell" : "hold";
   const signalChanged = previousSignal && previousSignal !== signal;
 
+  const signalGradient = signal === "BUY"
+    ? "from-emerald-500/8 via-emerald-500/3 to-transparent border-emerald-200/60"
+    : signal === "SELL"
+    ? "from-red-500/8 via-red-500/3 to-transparent border-red-200/60"
+    : "from-amber-500/8 via-amber-500/3 to-transparent border-amber-200/60";
+
+  const variant = signal === "BUY" ? "buy" : signal === "SELL" ? "sell" : "hold";
+
+  // Confidence ring color
+  const confidenceColor = rec.confidence >= 70 ? "text-emerald-500" : rec.confidence >= 40 ? "text-amber-500" : "text-red-500";
+  const circumference = 2 * Math.PI * 28;
+  const offset = circumference - (rec.confidence / 100) * circumference;
+
   return (
-    <div className={`p-6 rounded-2xl shadow-sm ${signalChanged ? "ring-2 ring-blue-400 animate-pulse" : ""} signal-${variant}`}>
+    <div className={`relative rounded-2xl bg-gradient-to-br ${signalGradient} border overflow-hidden ${signalChanged ? "animate-signal-pulse" : ""}`}>
       {/* AMO Banner */}
       {!marketOpen && (
-        <div className="mb-4 px-4 py-2 bg-orange-50 border border-orange-200 rounded-xl flex items-center gap-2">
-          <svg className="w-5 h-5 text-orange-500" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+        <div className="px-5 py-2.5 bg-gradient-to-r from-orange-500 to-amber-500 flex items-center gap-2.5">
+          <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <span className="text-sm font-medium text-orange-700">
-            AMO (After Market Order) — Place this order now, it will execute when market opens at 9:15 AM
+          <span className="text-sm font-semibold text-white">
+            AMO — Place this order now, executes when market opens at 9:15 AM
           </span>
         </div>
       )}
 
       {signalChanged && (
-        <div className="mb-3 text-sm text-blue-600 font-medium">
-          Signal changed! <span className="line-through text-gray-400">{previousSignal}</span> → {signal}
+        <div className="mx-5 mt-4 px-3 py-1.5 bg-blue-500/10 border border-blue-200 rounded-lg inline-flex items-center gap-2 text-sm text-blue-700 font-medium">
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+          </svg>
+          Signal changed: <span className="line-through opacity-50">{previousSignal}</span> → <span className="font-bold">{signal}</span>
         </div>
       )}
 
-      <div className="flex flex-wrap items-start justify-between gap-6">
-        {/* Main Signal */}
-        <div className="flex items-center gap-4">
-          <div className="flex flex-col items-center gap-1">
-            <Badge variant={variant} pulse={!!signalChanged} size="lg">
-              {signal}
-            </Badge>
-            {!marketOpen && (
-              <span className="text-xs font-bold text-orange-600">AMO</span>
-            )}
+      <div className="p-5">
+        <div className="flex items-center gap-6">
+          {/* Signal Badge + Confidence Ring */}
+          <div className="relative flex-shrink-0">
+            <svg className="w-20 h-20 -rotate-90" viewBox="0 0 64 64">
+              <circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" strokeWidth="3" className="text-gray-100" />
+              <circle cx="32" cy="32" r="28" fill="none" strokeWidth="3" strokeLinecap="round"
+                className={confidenceColor}
+                style={{ strokeDasharray: circumference, strokeDashoffset: offset, transition: 'stroke-dashoffset 1s ease' }}
+              />
+            </svg>
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <Badge variant={variant} size="sm">{signal}</Badge>
+            </div>
           </div>
-          <div>
-            <div className="text-sm text-gray-400">Confidence</div>
-            <div className="text-lg font-bold text-gray-900">{rec.confidence}%</div>
-          </div>
-        </div>
 
-        {/* Details Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-sm">
-          <div>
-            <span className="text-gray-400">Entry Price</span>
-            <div className="font-semibold text-gray-900">
-              {rec.entry_price ? `₹${rec.entry_price.toLocaleString("en-IN")}` : "—"}
+          {/* Confidence + Risk */}
+          <div className="flex-shrink-0">
+            <div className="text-3xl font-extrabold text-gray-900" style={{ fontFamily: 'Plus Jakarta Sans' }}>
+              {rec.confidence}<span className="text-lg text-gray-400 font-medium">%</span>
             </div>
-          </div>
-          <div>
-            <span className="text-gray-400">Time Frame</span>
-            <div className="font-semibold text-gray-900">{rec.timeframe || "—"}</div>
-          </div>
-          <div>
-            <span className="text-gray-400">Stop Loss</span>
-            <div className="font-semibold text-red-600">
-              {rec.stop_loss ? `₹${rec.stop_loss.toLocaleString("en-IN")}` : "—"}
-            </div>
-          </div>
-          <div>
-            <span className="text-gray-400">Targets</span>
-            <div className="font-semibold text-green-600">
-              {rec.targets?.length
-                ? rec.targets.map((t, i) => `T${i + 1}: ₹${t.toLocaleString("en-IN")}`).join(" / ")
-                : "—"}
-            </div>
-          </div>
-          <div>
-            <span className="text-gray-400">Risk</span>
-            <div className="font-semibold text-gray-900">{risk_score}/10 — {risk_label}</div>
-          </div>
-        </div>
-      </div>
-
-      {/* Multi-timeframe */}
-      {mtf && (
-        <div className="mt-4 pt-4 border-t border-gray-50 flex flex-wrap gap-4 text-sm">
-          {Object.entries(mtf).map(([tf, data]) => {
-            const v = data.signal === "BUY" ? "buy" : data.signal === "SELL" ? "sell" : "hold";
-            return (
-              <div key={tf} className="flex items-center gap-2">
-                <span className="text-gray-400 capitalize">{tf}:</span>
-                <Badge variant={v as "buy" | "sell" | "hold"}>{data.signal}</Badge>
-                <span className="text-gray-500 text-xs">{data.note}</span>
+            <div className="text-xs text-gray-500 font-medium">Confidence</div>
+            <div className="mt-1.5 flex items-center gap-1.5">
+              <div className="flex gap-0.5">
+                {Array.from({ length: 10 }).map((_, i) => (
+                  <div key={i} className={`w-1.5 h-3 rounded-full ${i < risk_score ? (risk_score <= 3 ? "bg-emerald-400" : risk_score <= 6 ? "bg-amber-400" : "bg-red-400") : "bg-gray-200"}`} />
+                ))}
               </div>
-            );
-          })}
-        </div>
-      )}
+              <span className="text-[10px] text-gray-500 font-medium">{risk_label}</span>
+            </div>
+          </div>
 
-      {/* Risk-Reward */}
-      {rec.risk_reward && (
-        <div className="mt-3 text-sm text-gray-500">
-          Risk-Reward Ratio: <span className="font-semibold text-gray-900">{rec.risk_reward}</span>
+          {/* Divider */}
+          <div className="w-px h-16 bg-gray-200/80 hidden md:block" />
+
+          {/* Trade Details */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-3 flex-1">
+            <TradeDetail
+              label="Entry Price"
+              value={rec.entry_price ? `₹${rec.entry_price.toLocaleString("en-IN")}` : "At Market"}
+            />
+            <TradeDetail
+              label="Time Frame"
+              value={rec.timeframe || "—"}
+            />
+            <TradeDetail
+              label="Stop Loss"
+              value={rec.stop_loss ? `₹${rec.stop_loss.toLocaleString("en-IN")}` : "—"}
+              valueClass="text-red-600"
+            />
+            <TradeDetail
+              label="Targets"
+              value={rec.targets?.length
+                ? rec.targets.map((t, i) => `T${i + 1}: ₹${t.toLocaleString("en-IN")}`).join("  ")
+                : "—"}
+              valueClass="text-emerald-600"
+            />
+          </div>
         </div>
-      )}
+
+        {/* Risk-Reward */}
+        {rec.risk_reward && (
+          <div className="mt-4 pt-3 border-t border-gray-200/50 flex items-center gap-2 text-sm">
+            <span className="text-gray-400">Risk-Reward</span>
+            <span className="font-bold text-gray-900 bg-gray-100 px-2 py-0.5 rounded-md">{rec.risk_reward}</span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function TradeDetail({ label, value, valueClass = "text-gray-900" }: { label: string; value: string; valueClass?: string }) {
+  return (
+    <div>
+      <div className="text-[10px] text-gray-400 font-semibold uppercase tracking-wider mb-0.5">{label}</div>
+      <div className={`text-sm font-bold ${valueClass}`}>{value}</div>
     </div>
   );
 }
