@@ -32,7 +32,7 @@ export default function Navbar() {
           About
         </a>
         <ThemeToggle />
-        <a href="#how-it-works" className="px-5 py-2 bg-blue-600 text-white text-sm font-semibold rounded-xl hover:bg-blue-700 transition-all hover:shadow-lg hover:shadow-blue-500/25">
+        <a href="#hero-search" className="px-5 py-2 bg-blue-600 text-white text-sm font-semibold rounded-xl hover:bg-blue-700 transition-all hover:shadow-lg hover:shadow-blue-500/25">
           Get Started
         </a>
       </div>

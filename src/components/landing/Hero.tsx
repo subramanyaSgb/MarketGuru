@@ -5,7 +5,7 @@ import ShinyText from "@/components/reactbits/ShinyText";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[85vh] flex flex-col items-center justify-center px-6 py-24 overflow-hidden hero-gradient">
+    <section id="hero-search" className="relative min-h-[85vh] flex flex-col items-center justify-center px-6 py-24 overflow-hidden hero-gradient">
       {/* Decorative elements */}
       <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl" />
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-indigo-400/10 rounded-full blur-3xl" />
