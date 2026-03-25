@@ -7,13 +7,13 @@ import DisclaimerModal from "@/components/ui/DisclaimerModal";
 
 export default function Home() {
   return (
-    <>
+    <main className="min-h-screen">
       <DisclaimerModal />
       <Navbar />
       <Hero />
       <HowItWorks />
       <TrustSection />
       <Footer />
-    </>
+    </main>
   );
 }
