@@ -104,6 +104,14 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
   const { nodes, materials } = useGLTF('/lanyard/card.glb') as any;
   const texture = useTexture('/lanyard/lanyard.png');
   const profileTexture = useTexture('/profile.jpeg');
+
+  // Ensure profile texture maps correctly to card UV
+  useEffect(() => {
+    if (profileTexture) {
+      profileTexture.flipY = true;
+      profileTexture.needsUpdate = true;
+    }
+  }, [profileTexture]);
   const [curve] = useState(
     () => new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()])
   );
@@ -183,7 +191,15 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
             onPointerDown={(e: any) => { e.target.setPointerCapture(e.pointerId); drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation()))); }}
           >
             <mesh geometry={nodes.card.geometry}>
-              <meshPhysicalMaterial map={profileTexture} map-anisotropy={16} clearcoat={isMobile ? 0 : 1} clearcoatRoughness={0.15} roughness={0.3} metalness={0.1} />
+              <meshPhysicalMaterial
+                map={profileTexture}
+                map-anisotropy={16}
+                clearcoat={isMobile ? 0 : 1}
+                clearcoatRoughness={0.15}
+                roughness={0.3}
+                metalness={0.1}
+                color="#ffffff"
+              />
             </mesh>
             <mesh geometry={nodes.clip.geometry} material={materials.metal} material-roughness={0.3} />
             <mesh geometry={nodes.clamp.geometry} material={materials.metal} />

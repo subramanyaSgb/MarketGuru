@@ -137,8 +137,8 @@ export default function AboutPage() {
 
               {/* Lanyard with photo on mobile */}
               <div className="flex justify-center mb-6 lg:hidden">
-                <div className="w-full max-w-sm h-[400px] rounded-2xl overflow-hidden">
-                  <Lanyard position={[0, 0, 22]} fov={28} />
+                <div className="w-full max-w-sm h-[400px]">
+                  <Lanyard position={[0, 0, 14]} fov={30} />
                 </div>
               </div>
 
@@ -158,10 +158,10 @@ export default function AboutPage() {
 
             {/* Right: Lanyard with photo inside (desktop) */}
             <div className="hidden lg:flex flex-col items-center">
-              <div className="w-[350px] h-[500px] rounded-2xl overflow-hidden">
-                <Lanyard position={[0, 0, 22]} fov={26} />
+              <div className="w-[400px] h-[550px]">
+                <Lanyard position={[0, 0, 14]} fov={30} />
               </div>
-              <p className="text-[10px] text-gray-400 dark:text-gray-500 uppercase tracking-wider font-semibold mt-2">Drag the badge to interact</p>
+              <p className="text-[10px] text-gray-400 dark:text-gray-500 uppercase tracking-wider font-semibold -mt-4">Drag the badge to interact</p>
             </div>
           </div>
         </div>
