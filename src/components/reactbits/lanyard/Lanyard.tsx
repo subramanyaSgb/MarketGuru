@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, Suspense } from 'react';
 import { Canvas, extend, useFrame } from '@react-three/fiber';
 import { useGLTF, useTexture, Environment, Lightformer } from '@react-three/drei';
 import {
@@ -32,6 +32,7 @@ export default function Lanyard({
   transparent = true,
 }: LanyardProps) {
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 768);
@@ -40,15 +41,25 @@ export default function Lanyard({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  if (error) {
+    return (
+      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-600 via-indigo-600 to-violet-600 rounded-2xl">
+        <span className="text-6xl font-extrabold text-white" style={{ fontFamily: 'Plus Jakarta Sans' }}>SB</span>
+      </div>
+    );
+  }
+
   return (
-    <div className="relative z-0 w-full h-[500px] md:h-[600px]">
-      <Canvas
-        camera={{ position, fov }}
-        dpr={[1, isMobile ? 1.5 : 2]}
-        gl={{ alpha: transparent }}
-        onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
-      >
-        <ambientLight intensity={Math.PI} />
+    <Canvas
+      camera={{ position, fov }}
+      dpr={[1, isMobile ? 1.5 : 2]}
+      gl={{ alpha: transparent }}
+      onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
+      onError={() => setError('WebGL error')}
+      style={{ width: '100%', height: '100%' }}
+    >
+      <ambientLight intensity={Math.PI} />
+      <Suspense fallback={null}>
         <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
           <Band isMobile={isMobile} />
         </Physics>
@@ -58,8 +69,8 @@ export default function Lanyard({
           <Lightformer intensity={3} color="white" position={[1, 1, 1]} rotation={[0, 0, Math.PI / 3]} scale={[100, 0.1, 1]} />
           <Lightformer intensity={10} color="white" position={[-10, 0, 14]} rotation={[0, Math.PI / 2, Math.PI / 3]} scale={[100, 10, 1]} />
         </Environment>
-      </Canvas>
-    </div>
+      </Suspense>
+    </Canvas>
   );
 }
 
@@ -92,6 +103,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
 
   const { nodes, materials } = useGLTF('/lanyard/card.glb') as any;
   const texture = useTexture('/lanyard/lanyard.png');
+  const profileTexture = useTexture('/profile.jpeg');
   const [curve] = useState(
     () => new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()])
   );
@@ -171,7 +183,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
             onPointerDown={(e: any) => { e.target.setPointerCapture(e.pointerId); drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation()))); }}
           >
             <mesh geometry={nodes.card.geometry}>
-              <meshPhysicalMaterial map={materials.base.map} map-anisotropy={16} clearcoat={isMobile ? 0 : 1} clearcoatRoughness={0.15} roughness={0.9} metalness={0.8} />
+              <meshPhysicalMaterial map={profileTexture} map-anisotropy={16} clearcoat={isMobile ? 0 : 1} clearcoatRoughness={0.15} roughness={0.3} metalness={0.1} />
             </mesh>
             <mesh geometry={nodes.clip.geometry} material={materials.metal} material-roughness={0.3} />
             <mesh geometry={nodes.clamp.geometry} material={materials.metal} />
