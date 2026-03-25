@@ -7,6 +7,7 @@ import LiveChart from "@/components/stock/LiveChart";
 import TimeframeCards from "@/components/stock/TimeframeCards";
 import AIThinkingPanel from "@/components/ai/AIThinkingPanel";
 import SearchBar from "@/components/ui/SearchBar";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 import { StockQuote, CandleData, AIAnalysis } from "@/lib/types";
 import { isMarketOpen } from "@/lib/market-data";
 
@@ -130,7 +131,7 @@ export default function StockPage() {
     <div className="min-h-screen relative">
       {/* Animated background */}
       <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-blue-50/30" />
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 dark:from-[#0b1121] dark:via-[#0f172a] dark:to-[#0b1121]" />
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/20 rounded-full blur-3xl animate-float" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-100/15 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
         <div className="absolute top-1/2 left-1/2 w-[400px] h-[400px] bg-violet-100/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }} />
@@ -160,6 +161,7 @@ export default function StockPage() {
           <div className="flex-1 max-w-sm ml-4">
             <SearchBar size="sm" />
           </div>
+          <ThemeToggle />
         </div>
       </div>
 
@@ -198,7 +200,7 @@ export default function StockPage() {
         </div>
 
         {/* Right: AI Panel */}
-        <div className="lg:w-[30%] lg:sticky lg:top-16 lg:self-start lg:max-h-[calc(100vh-5rem)] lg:overflow-hidden">
+        <div className="lg:w-[30%] lg:sticky lg:top-16 lg:self-start" style={{ maxHeight: 'calc(100vh - 5rem)' }}>
           <AIThinkingPanel analysis={analysis} loading={loadingAI && !analysis} />
         </div>
       </div>

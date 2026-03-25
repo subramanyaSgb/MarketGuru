@@ -11,7 +11,7 @@ export default function AIThinkingPanel({ analysis, loading }: AIThinkingPanelPr
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm h-full flex flex-col overflow-hidden">
+    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm flex flex-col overflow-hidden" style={{ maxHeight: 'calc(100vh - 6rem)' }}>
       {/* Header */}
       <button
         onClick={() => setIsOpen(!isOpen)}

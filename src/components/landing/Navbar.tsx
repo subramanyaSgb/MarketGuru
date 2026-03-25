@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -30,6 +31,7 @@ export default function Navbar() {
         <a href="#about" className="text-gray-500 hover:text-gray-900 text-sm font-medium transition-colors">
           About
         </a>
+        <ThemeToggle />
         <a href="#how-it-works" className="px-5 py-2 bg-blue-600 text-white text-sm font-semibold rounded-xl hover:bg-blue-700 transition-all hover:shadow-lg hover:shadow-blue-500/25">
           Get Started
         </a>
